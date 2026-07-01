@@ -46,10 +46,12 @@ class Tile:
 
 
 # Green border frame
+
 border = tk.Frame(root, bg="lime")
 border.pack()
 
 # Added padding to expose the green border underneath
+
 canvas = tk.Canvas(
     border,
     bg="#111111",
@@ -74,19 +76,24 @@ root.geometry(f"{WINDOW_WIDTH + 4}x{WINDOW_HEIGHT + 4}+{window_x}+{window_y}")
 player = Tile(5 * TILE_SIZE, 5 * TILE_SIZE)
 
 target = Tile(
+    
     random.randint(0, COL - 1) * TILE_SIZE,
     random.randint(0, ROWS - 1) * TILE_SIZE,
 )
 
 enemy = Tile(
+    
     random.randint(0, COL - 1) * TILE_SIZE,
     random.randint(0, ROWS - 1) * TILE_SIZE,
 )
 
 # Prevent spawning on the player
+
 while (target.x == player.x and target.y == player.y) or (
+    
     enemy.x == player.x and enemy.y == player.y
 ) or (enemy.x == target.x and enemy.y == target.y):
+    
     target = Tile(
         random.randint(0, COL - 1) * TILE_SIZE,
         random.randint(0, ROWS - 1) * TILE_SIZE,
@@ -95,6 +102,7 @@ while (target.x == player.x and target.y == player.y) or (
         random.randint(0, COL - 5) * TILE_SIZE,
         random.randint(0, ROWS - 5) * TILE_SIZE,
     )
+# GAME VARIBALES
 
 velocity_x = 0
 velocity_y = 0
@@ -105,7 +113,10 @@ game_started = False  # Track if player made their first move
 
 stop_job = None
 
+# RESET
+
 def reset_game():
+    
     global player, target, enemy
     global velocity_x, velocity_y
     global score, game_over, game_started
@@ -154,6 +165,7 @@ def reset_game():
 # ---------------- INPUT ----------------
 
 def change_dir(e):
+    
     global velocity_x, velocity_y, stop_job, game_started
 
     key = e.keysym.lower()
@@ -190,6 +202,7 @@ def change_dir(e):
         move_enemy()
 
 def stop_movement():
+    
     global velocity_x, velocity_y
     velocity_x = 0
     velocity_y = 0
@@ -197,6 +210,7 @@ def stop_movement():
 # ---------------- ENEMY AI ----------------
 
 def move_enemy():
+    
     global game_over
 
     if game_over:
@@ -224,6 +238,7 @@ def move_enemy():
 # ---------------- PLAYER LOGIC ----------------
 
 def move():
+    
     global game_over, score
 
     if game_over:
@@ -269,8 +284,9 @@ def move():
 # ---------------- DRAW ----------------
 
 def draw():
+    
     move()
-
+    
     canvas.delete("all")
 
     # Clean inner grid lines matching your variables
